@@ -1504,63 +1504,6 @@
   </div>
 
   <script>
-    var SERVICOS = [
-    {"pt": "Cortinas", "es": "Cortinas", "img": "https://images.unsplash.com/photo-1580331451062-99ff652288d7?w=800&q=80", "desc_pt": "Lavagem especializada de cortinas de todos os tecidos e tamanhos, com cuidado na remoção de poeira e manchas.", "desc_es": "Lavado especializado de cortinas de todos los tejidos y tamaños, con cuidado en la eliminación de polvo y manchas.", "video": "y7T7Fl46MwA"},
-    {"pt": "Tapetes", "es": "Alfombras", "img": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80", "desc_pt": "Higienização profunda de tapetes de todos os tamanhos e materiais, eliminando ácaros, sujeira e odores.", "desc_es": "Higienización profunda de alfombras de todos los tamaños y materiales, eliminando ácaros, suciedad y olores.", "video": "QVcPRPC1Lmg"},
-    {"pt": "Persianas", "es": "Persianas", "img": "https://images.unsplash.com/photo-1615874694520-474822394e73?w=800&q=80", "desc_pt": "Limpeza detalhada de persianas de tecido, plástico e alumínio, restaurando o visual e eliminando poeira.", "desc_es": "Limpieza detallada de persianas de tela, plástico y aluminio, restaurando el aspecto y eliminando el polvo.", "video": "pQQspZyxc-w"},
-    {"pt": "Edredons", "es": "Edredones", "img": "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80", "desc_pt": "Lavagem de edredons, duvets e cobertores com processo especial que preserva o enchimento e elimina ácaros.", "desc_es": "Lavado de edredones y mantas con proceso especial que preserva el relleno y elimina los ácaros.", "video": "pLL_gry6mKg"},
-    {"pt": "Roupas do dia a dia", "es": "Ropa del día a día", "img": "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=800&q=80", "desc_pt": "Lavagem, secagem e passadoria das suas peças do cotidiano com cuidado e agilidade.", "desc_es": "Lavado, secado y planchado de sus prendas cotidianas con cuidado y agilidad.", "video": "qAUxiBFAv_g"},
-    {"pt": "Vestidos de Festa", "es": "Vestidos de fiesta", "img": "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800&q=80", "desc_pt": "Tratamento delicado para vestidos de festa, noiva e formatura — preservando bordados, rendas e tecidos nobres.", "desc_es": "Tratamiento delicado para vestidos de fiesta, novia y graduación — preservando bordados, encajes y telas nobles.", "video": "KQ7033OqBQw"},
-    {"pt": "Ternos", "es": "Trajes", "img": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&q=80", "desc_pt": "Lavagem a seco e passadoria profissional de ternos, blazers e paletós para manter o corte e o caimento perfeito.", "desc_es": "Lavado en seco y planchado profesional de trajes, blazers y sacos para mantener el corte y caída perfectos.", "video":"gNJnb_htlgI"},
-    {"pt": "Casacos", "es": "Abrigos", "img": "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=800&q=80", "desc_pt": "Higienização e lavagem especializada de casacos de lã, pluma, sintético e outros materiais.", "desc_es": "Higienización y lavado especializado de abrigos de lana, pluma, sintético y otros materiales.", "video": "QlNZh_6ZMss"},
-    {"pt": "Couro", "es": "Cuero", "img": "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&q=80", "desc_pt": "Limpeza e hidratação de peças de couro e camurça, recuperando a maciez, brilho e cor originais.", "desc_es": "Limpieza e hidratación de prendas de cuero y gamuza, recuperando la suavidad, brillo y color originales.", "video": "QlNZh_6ZMss"},
-    {"pt": "Tingimento", "es": "Teñido", "img": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&q=80", "desc_pt": "Tingimento profissional de roupas e tecidos — renove a cor de peças desbotadas ou mude completamente o visual.", "desc_es": "Teñido profesional de ropa y telas — renueve el color de prendas desvanecidas o cambie completamente el look.", "video": "EZuw9BzGwbI"}
-  ];
-    var currentPainel = -1;
-
-    function openModal(idx) {
-      var s = SERVICOS[idx];
-      var lang = document.documentElement.lang === 'es' ? 'es' : 'pt';
-      var painel = document.getElementById('servicoPainel');
-      var img = document.getElementById('painelImg');
-      var videoWrap = document.getElementById('painelVideoWrap');
-      var iframe = document.getElementById('painelVideo');
-
-      if (s.video) {
-        img.style.display = 'none';
-        videoWrap.style.display = 'block';
-        iframe.src = 'https://www.youtube.com/embed/' + s.video + '?autoplay=1&rel=0';
-      } else {
-        videoWrap.style.display = 'none';
-        iframe.src = '';
-        img.style.display = 'block';
-        img.src = s.img;
-        img.alt = lang === 'pt' ? s.pt : s.es;
-      }
-
-      document.getElementById('painelTitle').textContent = lang === 'pt' ? s.pt : s.es;
-      document.getElementById('painelDesc').textContent = lang === 'pt' ? s.desc_pt : s.desc_es;
-
-      if (currentPainel === idx) { closePainel(); return; }
-      currentPainel = idx;
-
-      document.querySelectorAll('.servico-badge').forEach(function(b) { b.classList.remove('active'); });
-      document.querySelectorAll('.servico-badge[onclick="openModal(' + idx + ')"]').forEach(function(b) { b.classList.add('active'); });
-
-      painel.style.display = 'block';
-      painel.style.animation = 'none';
-      requestAnimationFrame(function() { painel.style.animation = 'painelIn .3s ease'; });
-      setTimeout(function() { painel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 50);
-    }
-
-    function closePainel() {
-      document.getElementById('servicoPainel').style.display = 'none';
-      document.querySelectorAll('.servico-badge').forEach(function(b) { b.classList.remove('active'); });
-      currentPainel = -1;
-    }
-  </script>
-
-  <script>
     (function() {
       var track = document.getElementById('avalTrack');
       if (!track) return;
